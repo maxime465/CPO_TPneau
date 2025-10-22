@@ -28,6 +28,13 @@ public class TP1_manipNombresInt_ {
         int b = sc.nextInt();
 
         // Affichage des valeurs saisies
-        System.out.println("Vous avez saisi : " + a + " et " + b);}
+        System.out.println("Vous avez saisi : " + a + " et " + b);
+         int somme = a + b;
+        int difference = a - b;
+        int produit = a * b;
+
+     System.out.println("La somme des deux nombres est : " + somme);
+        System.out.println("La différence (a - b) est : " + difference);
+        System.out.println("Le produit des deux nombres est : " + produit);}
     
 }
