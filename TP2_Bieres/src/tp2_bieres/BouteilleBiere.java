@@ -16,11 +16,11 @@ public class BouteilleBiere {
     boolean ouverte;
 
   
-    public BouteilleBiere(String nom, double degreAlcool, String brasserie) {
-        this.nom = nom;
-        this.degreAlcool = degreAlcool;
-        this.brasserie = brasserie;
-        this.ouverte = false;
+    public BouteilleBiere(String Unnom, double undegre , String unbar) {
+        nom = Unnom;
+        degreAlcool =  undegre;
+        brasserie = unbar;
+        ouverte = false;
 }
      void lireEtiquette() {
         System.out.println("Bouteille de " + nom + " (" + degreAlcool + " degrés) \nBrasserie : " + brasserie);
@@ -28,14 +28,16 @@ public class BouteilleBiere {
         System.out.println("-----------------------------");
     }
 
-    void ouvrir() {
-        if (!ouverte) {
-            ouverte = true;
-            System.out.println(nom + " est maintenant ouverte !");
-        } else {
+    void Décapsuler() {
+        if (ouverte) {
+            ouverte = true ;
             System.out.println(nom + " est déjà ouverte.");
+        } else {
+            System.out.println(nom + " est fermé !");
                 }
                   }
+   
+    
      }
 
 
