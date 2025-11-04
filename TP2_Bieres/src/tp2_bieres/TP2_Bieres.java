@@ -15,10 +15,10 @@ public class TP2_Bieres {
         uneBiere.lireEtiquette();
         BouteilleBiere deuxiemeBiere = new BouteilleBiere("Leffe", 6.6, "Abbaye de Leffe");
         deuxiemeBiere.lireEtiquette();
-        uneBiere.ouvrir();
+        uneBiere.Décapsuler();
         uneBiere.lireEtiquette();
 
-        deuxiemeBiere.ouvrir();
+        deuxiemeBiere.Décapsuler();
         deuxiemeBiere.lireEtiquette();
     }
 }
