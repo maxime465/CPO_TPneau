@@ -31,7 +31,12 @@ public class TP2_Bieres {
        cinquiemeBiere.Décapsuler();
        cinquiemeBiere.lireEtiquette();
        
-    
+    System.out.println("\n=== État des bières ===");
+        System.out.println(premiereBiere);
+        System.out.println(deuxiemeBiere);
+        System.out.println(troisiemeBiere);
+        System.out.println(quatrièmeBiere);
+        System.out.println(cinquiemeBiere);
     }
 }
  
