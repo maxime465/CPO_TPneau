@@ -4,6 +4,8 @@
  */
 package tp2_bieres;
 
+import static javax.management.Query.or;
+
 /**
  *
  * @author maxneau
@@ -20,7 +22,8 @@ public class BouteilleBiere {
         nom = Unnom;
         degreAlcool =  undegre;
         brasserie = unbar;
-        ouverte = false;
+        ouverte = false ;
+        
 }
      void lireEtiquette() {
         System.out.println("Bouteille de " + nom + " (" + degreAlcool + " degrés) \nBrasserie : " + brasserie);
@@ -36,9 +39,15 @@ public class BouteilleBiere {
             System.out.println(nom + " est fermé !");
                 }
                   }
-   
-    
-     }
+   @Override
+public String toString() {
+String chaine_a_retourner;
+chaine_a_retourner = nom + " (" + degreAlcool + " degrés)Ouverte ? ";
+if (ouverte == true ) chaine_a_retourner += "oui" ;
+else chaine_a_retourner += "non" ;
+return chaine_a_retourner ;
+}
+   }
 
 
    
