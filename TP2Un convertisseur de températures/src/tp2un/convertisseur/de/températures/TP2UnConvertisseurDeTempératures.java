@@ -2,18 +2,10 @@
  * Un convertisseur de températuresis template
  */
 package tp2un.convertisseur.de.températures;
-
-/**
- *
- * @author maxneau
- */
+        import java.util.Scanner;
 public class TP2UnConvertisseurDeTempératures {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
+    public static void main(String[] args) {}
+    Scanner sc = new Scanner(System.in);
+        Convertisseur conv = new Convertisseur();
     
 }
