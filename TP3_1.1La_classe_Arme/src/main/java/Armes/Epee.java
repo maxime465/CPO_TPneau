@@ -4,8 +4,8 @@
  */
 package Armes; 
 public class Epee extends Arme {
-    private int finesse;
+    private int indice;
     public Epee(String nom, int niveauAttaque, int finesse) {
         super(nom, niveauAttaque);
-        this.finesse = finesse;}
+        this.indice  = finesse;}
 }
