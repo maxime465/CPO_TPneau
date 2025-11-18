@@ -4,8 +4,9 @@
  */
 package Armes; 
 public class Baton extends Arme {
-     private int age;
+      int age;
     public Baton(String nom, int niveauAttaque, int par1) {
         super(nom, niveauAttaque);
+        if (age > 100)age=100;
     this.age = age;}
 }

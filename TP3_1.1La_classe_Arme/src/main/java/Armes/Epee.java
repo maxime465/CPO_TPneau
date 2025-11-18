@@ -4,8 +4,10 @@
  */
 package Armes; 
 public class Epee extends Arme {
-    private int indice;
+     int indice;
     public Epee(String nom, int niveauAttaque, int indice) {
         super(nom, niveauAttaque);
-        this.indice  = indice;}
-}
+        if (indice > 100)indice=100;
+        this.indice = indice;
+}}
+
