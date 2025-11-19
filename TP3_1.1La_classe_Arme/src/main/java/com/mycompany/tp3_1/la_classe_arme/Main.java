@@ -20,8 +20,8 @@ public class Main {
         armes.add(baton1);
         armes.add(baton2);
 
-        for (int i = 0; i < armes.size(); i++) {
-            System.out.println(armes.get(i));
+       for (Arme a : armes) {
+            System.out.println(a);
+        }
         }
     }
-}
