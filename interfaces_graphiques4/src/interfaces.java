@@ -2,24 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-   
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JFrame;
+
 /**
  *
  * @author maxneau
  */
-public class interfaces extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(interfaces.class.getName());
-int compteur=0 ;
+public class interfaces extends JFrame {
+    private List<Questions> questions;      // liste des questions
+    private int indexQuestionCourante = 0; // question actuelle
+    private int score = 0;                 // score du joueur
 
-    /**
-     * Creates new form interfaces
-     */
     public interfaces() {
         initComponents();
-
-        
-      }
+        initQuestions();           // créer les questions
+        afficherQuestionCourante(); // afficher la première question
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,30 +89,93 @@ int compteur=0 ;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void traiterReponse(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void afficherQuestionCourante() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+private void initQuestions() {
+    questions = new ArrayList<>();
+
+    questions.add(new Question("Quel est la capitale de la France ?", "Londres", "Paris", "Berlin", "Madrid", 2));
+    questions.add(new Question("Combien de jours dans une semaine ?", "5", "6", "7", "8", 3));
+    questions.add(new Question("Quelle est la couleur du ciel ?", "Vert", "Bleu", "Rouge", "Jaune", 2));
+    questions.add(new Question("2 + 2 = ?", "3", "4", "5", "22", 2));
+    questions.add(new Question("Lequel est un langage de programmation ?", "HTML", "CSS", "Java", "JPEG", 3));
+}
+
+private void afficherQuestionCourante() {
+    if (indexQuestionCourante >= questions.size()) {
+        zoneTexte.setText("Quiz terminé ! Score final : " + score + " / " + questions.size());
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        return;
+    }
+
+    Question q = questions.get(indexQuestionCourante);
+    zoneTexte.setText((indexQuestionCourante + 1) + ". " + q.getIntitule());
+    jButton1.setText(q.getProposition1());
+    jButton2.setText(q.getProposition2());
+    jButton3.setText(q.getProposition3());
+    jButton4.setText(q.getProposition4());
+
+    jButton1.setEnabled(true);
+    jButton2.setEnabled(true);
+    jButton3.setEnabled(true);
+    jButton4.setEnabled(true);
+}
+    private void traiterReponse(int numeroChoisi) {
+    Question q = questions.get(indexQuestionCourante);
+
+    if (numeroChoisi == q.getIndexBonneReponse()) {
+        zoneTexte.setText("Bonne réponse !");
+        score++;
+    } else {
+        String bonne = "";
+        switch (q.getIndexBonneReponse()) {
+            case 1: bonne = q.getProposition1(); break;
+            case 2: bonne = q.getProposition2(); break;
+            case 3: bonne = q.getProposition3(); break;
+            case 4: bonne = q.getProposition4(); break;
+        }
+        zoneTexte.setText("Mauvaise réponse ! La bonne réponse était : " + bonne);
+    }
+
+    jButton1.setEnabled(false);
+    jButton2.setEnabled(false);
+    jButton3.setEnabled(false);
+    jButton4.setEnabled(false);
+}
+
+}
+
+
     private void BoutonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoutonActionPerformed
-       zoneTexte.setVisible(true);
-       if (compteur==0) zoneTexte.setText ("alors mec tu date ");
-        if (compteur==1) zoneTexte.setText ("Viens on va manger");
-         if (compteur==2) zoneTexte.setText ("Du kombucha ");
-compteur++;
+     indexQuestionCourante++;      // passer à la question suivante
+afficherQuestionCourante();   
     }//GEN-LAST:event_BoutonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        traiterReponse(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-     
+       traiterReponse(2);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+      traiterReponse(3);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+      traiterReponse(4);
     }//GEN-LAST:event_jButton4ActionPerformed
 
  
@@ -148,4 +212,8 @@ compteur++;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel zoneTexte;
     // End of variables declaration//GEN-END:variables
-}
+// Variables pour gérer le quiz
+private List<Questions> questions;
+private int indexQuestionCourante = 0;
+private int score = 0;                     // score du joueur
+
