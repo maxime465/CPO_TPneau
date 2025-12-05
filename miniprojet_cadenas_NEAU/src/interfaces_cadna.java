@@ -10,7 +10,7 @@
 public class interfaces_cadna extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(interfaces_cadna.class.getName());
-private CadenasGame game = new CadenasGame();
+
 
     /**
      * Creates new form interfaces
@@ -41,6 +41,14 @@ private CadenasGame game = new CadenasGame();
         NB2 = new javax.swing.JLabel();
         NB3 = new javax.swing.JLabel();
         NB4 = new javax.swing.JLabel();
+        intro = new javax.swing.JLabel();
+        boutonTEST = new javax.swing.JButton();
+        RESTART = new javax.swing.JButton();
+        nbtentative = new javax.swing.JLabel();
+        essairestant = new javax.swing.JLabel();
+        NBchiffres_exact = new javax.swing.JLabel();
+        NBchiffres_haut = new javax.swing.JLabel();
+        NBchiffres_bas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,7 +59,7 @@ private CadenasGame game = new CadenasGame();
                     haut1ActionPerformed(evt);
                 }
             });
-            getContentPane().add(haut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+            getContentPane().add(haut1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
             haut2.setText("/\\");
                 haut2.addActionListener(new java.awt.event.ActionListener() {
@@ -59,13 +67,13 @@ private CadenasGame game = new CadenasGame();
                         haut2ActionPerformed(evt);
                     }
                 });
-                getContentPane().add(haut2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+                getContentPane().add(haut2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
                 haut3.setText("/\\");
-                    getContentPane().add(haut3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+                    getContentPane().add(haut3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
                     haut4.setText("/\\");
-                        getContentPane().add(haut4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
+                        getContentPane().add(haut4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
                         bas5.setText("\\/");
                         bas5.addActionListener(new java.awt.event.ActionListener() {
@@ -73,28 +81,72 @@ private CadenasGame game = new CadenasGame();
                                 bas5ActionPerformed(evt);
                             }
                         });
-                        getContentPane().add(bas5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+                        getContentPane().add(bas5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
                         bas6.setText("\\/");
-                        getContentPane().add(bas6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+                        bas6.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                bas6ActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(bas6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
                         bas7.setText("\\/");
-                        getContentPane().add(bas7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, -1, -1));
+                        getContentPane().add(bas7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
 
                         bas8.setText("\\/");
-                        getContentPane().add(bas8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
+                        getContentPane().add(bas8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
 
+                        NB1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
                         NB1.setText("0");
-                        getContentPane().add(NB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 60, 130));
+                        getContentPane().add(NB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 60, 60));
 
+                        NB2.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
                         NB2.setText("0");
-                        getContentPane().add(NB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 57, 60, 160));
+                        getContentPane().add(NB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 60, 100));
 
+                        NB3.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
                         NB3.setText("0");
-                        getContentPane().add(NB3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 57, 40, 160));
+                        getContentPane().add(NB3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 40, 90));
 
+                        NB4.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
                         NB4.setText("0");
-                        getContentPane().add(NB4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 57, 50, 160));
+                        getContentPane().add(NB4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 50, 70));
+
+                        intro.setText("trouve le code et tu seras riche!");
+                        getContentPane().add(intro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+
+                        boutonTEST.setText("Tester");
+                        boutonTEST.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                boutonTESTActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(boutonTEST, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, -1, -1));
+
+                        RESTART.setText("Recommencer ");
+                        RESTART.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                RESTARTActionPerformed(evt);
+                            }
+                        });
+                        getContentPane().add(RESTART, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, -1, -1));
+
+                        nbtentative.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
+                        nbtentative.setText("0/5");
+                        getContentPane().add(nbtentative, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 70, 80));
+
+                        essairestant.setText("Essai restant: ");
+                        getContentPane().add(essairestant, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, -1));
+
+                        NBchiffres_exact.setText("Nombre de chiffres exact :            0");
+                        getContentPane().add(NBchiffres_exact, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+                        NBchiffres_haut.setText("Nombre de chiffres trop hauts :     0");
+                        getContentPane().add(NBchiffres_haut, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 220, 20));
+
+                        NBchiffres_bas.setText("Nombre de chiffres trop bas :        0");
+                        getContentPane().add(NBchiffres_bas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 240, -1));
 
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
@@ -110,6 +162,18 @@ private CadenasGame game = new CadenasGame();
     private void bas5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bas5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bas5ActionPerformed
+
+    private void bas6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bas6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bas6ActionPerformed
+
+    private void boutonTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonTESTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boutonTESTActionPerformed
+
+    private void RESTARTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RESTARTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RESTARTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,13 +205,21 @@ private CadenasGame game = new CadenasGame();
     private javax.swing.JLabel NB2;
     private javax.swing.JLabel NB3;
     private javax.swing.JLabel NB4;
+    private javax.swing.JLabel NBchiffres_bas;
+    private javax.swing.JLabel NBchiffres_exact;
+    private javax.swing.JLabel NBchiffres_haut;
+    private javax.swing.JButton RESTART;
     private javax.swing.JButton bas5;
     private javax.swing.JButton bas6;
     private javax.swing.JButton bas7;
     private javax.swing.JButton bas8;
+    private javax.swing.JButton boutonTEST;
+    private javax.swing.JLabel essairestant;
     private javax.swing.JButton haut1;
     private javax.swing.JButton haut2;
     private javax.swing.JButton haut3;
     private javax.swing.JButton haut4;
+    private javax.swing.JLabel intro;
+    private javax.swing.JLabel nbtentative;
     // End of variables declaration//GEN-END:variables
 }
