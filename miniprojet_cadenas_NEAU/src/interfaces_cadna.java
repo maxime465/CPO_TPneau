@@ -168,7 +168,9 @@ public class interfaces_cadna extends javax.swing.JFrame {
     }//GEN-LAST:event_bas6ActionPerformed
 
     private void boutonTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonTESTActionPerformed
-        // TODO add your handling code here:
+   
+
+
     }//GEN-LAST:event_boutonTESTActionPerformed
 
     private void RESTARTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RESTARTActionPerformed
