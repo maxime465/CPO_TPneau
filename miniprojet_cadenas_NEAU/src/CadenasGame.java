@@ -8,102 +8,76 @@
  * @author maxneau
  */
 import java.util.Random;
-
-/**
- * Classe métier pour le mini-projet Cadenas
- */
 public class CadenasGame {
 
-    private int[] secret;      // Code secret à deviner
-    private int nbEssais;      // Nombre d'essais effectués
-    private final int maxEssais = 5;  // Maximum d'essais
+    private final String secret;    
+    private int nbEssais;          
 
-    /**
-     * Constructeur : génère un nouveau code secret
-     */
-    public CadenasGame() {
-        genererSecret();
-    }
-
-    /**
-     * Génère un code secret aléatoire de 4 chiffres (0 à 9)
-     */
-    public void genererSecret() {
-        secret = new int[4];
-        Random rand = new Random();
-        for (int i = 0; i < 4; i++) {
-            secret[i] = rand.nextInt(10);
-        }
-        nbEssais = 0;
-    }
-
-    /**
-     * Évalue un essai donné
-     * @param essai : chaîne de 4 chiffres
-     * @return Resultat avec nombre exact, trop haut et trop bas
-     */
-    public Resultat evaluer(String essai) {
-        if (essai == null || essai.length() != 4) {
-            throw new IllegalArgumentException("L'essai doit contenir 4 chiffres.");
-        }
-
-        int exact = 0;
-        int haut = 0;
-        int bas = 0;
-
-        for (int i = 0; i < 4; i++) {
-            int d = Character.getNumericValue(essai.charAt(i));
-            if (d == secret[i]) {
-                exact++;
-            } else if (d > secret[i]) {
-                haut++;
-            } else {
-                bas++;
-            }
-        }
-
-        nbEssais++;
-        return new Resultat(exact, haut, bas);
-    }
-
-    /**
-     * Vérifie si le joueur a trouvé le code
-     * @param r : résultat de l'essai
-     * @return true si 4 chiffres exacts
-     */
-    public boolean estGagne(Resultat r) {
-        return r.exact == 4;
-    }
-
-    /** Retourne le nombre d'essais effectués */
-    public int getNbEssais() {
-        return nbEssais;
-    }
-
-    /** Retourne le code secret sous forme de chaîne */
-    public String getSecret() {
-        StringBuilder sb = new StringBuilder();
-        for (int v : secret) {
-            sb.append(v);
-        }
-        return sb.toString();
-    }
-
-    /** Classe interne pour stocker le résultat d'un essai */
+    
     public static class Resultat {
-        public final int exact;
-        public final int haut;
-        public final int bas;
+        public int exact;
+        public int haut;
+        public int bas;
 
         public Resultat(int exact, int haut, int bas) {
             this.exact = exact;
             this.haut = haut;
             this.bas = bas;
         }
-
-        @Override
-        public String toString() {
-            return "Exact: " + exact + " | Trop hauts: " + haut + " | Trop bas: " + bas;
-        }
     }
-}
+
+   
+    public CadenasGame() {
+        this.secret = genererCode();
+        this.nbEssais = 0;
+    }
+
+    
+    private String genererCode() {
+        StringBuilder sb = new StringBuilder();
+        java.util.Random r = new java.util.Random();
+        for (int i = 0; i < 4; i++) {
+            sb.append(r.nextInt(10)); // 0 à 9
+        }
+        return sb.toString();
+    }
+
+    
+    public Resultat evaluer(String essai) {
+        nbEssais++;
+
+        int exact = 0;
+        int haut = 0;
+        int bas = 0;
+
+        for (int i = 0; i < 4; i++) {
+            int e = Character.getNumericValue(essai.charAt(i));
+            int s = Character.getNumericValue(secret.charAt(i));
+
+            if (e == s) {
+                exact++;
+            } else if (e > s) {
+                haut++;
+            } else {
+                bas++;
+            }
+        }
+
+        return new Resultat(exact, haut, bas);
+    }
+
+    
+    public boolean estGagne(Resultat r) {
+        return r.exact == 4;
+    }
+
+   
+    public int getNbEssais() {
+        return nbEssais;
+    }
+ public String getSecret() {
+        return secret;
+    }
+    public void reset() {
+        nbEssais = 0;
+    }}
