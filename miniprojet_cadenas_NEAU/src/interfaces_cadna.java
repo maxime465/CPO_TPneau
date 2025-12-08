@@ -168,7 +168,7 @@ public class interfaces_cadna extends javax.swing.JFrame {
     }//GEN-LAST:event_bas6ActionPerformed
 
     private void boutonTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonTESTActionPerformed
-   
+ 
 
 
     }//GEN-LAST:event_boutonTESTActionPerformed
@@ -224,4 +224,16 @@ public class interfaces_cadna extends javax.swing.JFrame {
     private javax.swing.JLabel intro;
     private javax.swing.JLabel nbtentative;
     // End of variables declaration//GEN-END:variables
+private void modifierLabel(javax.swing.JLabel label, int delta) {
+    try {
+        int valeur = Integer.parseInt(label.getText());
+        valeur = (valeur + delta + 10) % 10; // boucle de 0 à 9
+        label.setText(String.valueOf(valeur));
+    } catch (NumberFormatException ex) {
+        label.setText("0");
+    }
+}
+
+
+
 }
