@@ -1,3 +1,6 @@
+
+import miniprojet_cadenas_NEAU.CadenasGame;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,6 +11,8 @@
  * @author maxneau
  */
 public class interfaces_cadna extends javax.swing.JFrame {
+    private CadenasGame game = new CadenasGame();
+
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(interfaces_cadna.class.getName());
 
@@ -17,8 +22,11 @@ public class interfaces_cadna extends javax.swing.JFrame {
      */
     public interfaces_cadna() {
         initComponents();
+        }
+
+
         
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,9 +78,19 @@ public class interfaces_cadna extends javax.swing.JFrame {
                 getContentPane().add(haut2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
                 haut3.setText("/\\");
+                    haut3.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                            haut3ActionPerformed(evt);
+                        }
+                    });
                     getContentPane().add(haut3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
 
                     haut4.setText("/\\");
+                        haut4.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                haut4ActionPerformed(evt);
+                            }
+                        });
                         getContentPane().add(haut4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
                         bas5.setText("\\/");
@@ -92,9 +110,19 @@ public class interfaces_cadna extends javax.swing.JFrame {
                         getContentPane().add(bas6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
 
                         bas7.setText("\\/");
+                        bas7.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                bas7ActionPerformed(evt);
+                            }
+                        });
                         getContentPane().add(bas7, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
 
                         bas8.setText("\\/");
+                        bas8.addActionListener(new java.awt.event.ActionListener() {
+                            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                bas8ActionPerformed(evt);
+                            }
+                        });
                         getContentPane().add(bas8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
 
                         NB1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
@@ -152,30 +180,77 @@ public class interfaces_cadna extends javax.swing.JFrame {
                     }// </editor-fold>//GEN-END:initComponents
 
     private void haut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haut1ActionPerformed
-        // TODO add your handling code here:
+                                             
+    modifierLabel(NB1, +1);
+   
+
     }//GEN-LAST:event_haut1ActionPerformed
 
     private void haut2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haut2ActionPerformed
-        // TODO add your handling code here:
+                                     
+    modifierLabel(NB2, +1);
+
+
     }//GEN-LAST:event_haut2ActionPerformed
 
     private void bas5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bas5ActionPerformed
-        // TODO add your handling code here:
+                                  
+    modifierLabel(NB1, -1);
+
+
     }//GEN-LAST:event_bas5ActionPerformed
 
     private void bas6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bas6ActionPerformed
-        // TODO add your handling code here:
+        modifierLabel(NB2, -1);
     }//GEN-LAST:event_bas6ActionPerformed
 
     private void boutonTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boutonTESTActionPerformed
- 
+  String essai = NB1.getText() + NB2.getText() + NB3.getText() + NB4.getText();
+    CadenasGame.Resultat r = game.evaluer(essai);
+
+    NBchiffres_exact.setText("Nombre de chiffres exact : " + r.exact);
+    NBchiffres_haut.setText("Nombre de chiffres trop hauts : " + r.haut);
+    NBchiffres_bas.setText("Nombre de chiffres trop bas : " + r.bas);
+
+    nbtentative.setText(game.getNbEssais() + "/5");
+
+    if (game.estGagne(r)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Bravo, tu as gagné !");
+    } else if (game.getNbEssais() >= 5) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Perdu ! Le code était : " + game.getSecret());}
 
 
     }//GEN-LAST:event_boutonTESTActionPerformed
 
     private void RESTARTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RESTARTActionPerformed
-        // TODO add your handling code here:
+         game.nouveauCode();
+
+    NB1.setText("0");
+    NB2.setText("0");
+    NB3.setText("0");
+    NB4.setText("0");
+
+    NBchiffres_exact.setText("Nombre de chiffres exact : 0");
+    NBchiffres_haut.setText("Nombre de chiffres trop hauts : 0");
+    NBchiffres_bas.setText("Nombre de chiffres trop bas : 0");
+    nbtentative.setText("0/5");
     }//GEN-LAST:event_RESTARTActionPerformed
+
+    private void haut3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haut3ActionPerformed
+        modifierLabel(NB3, +1);
+    }//GEN-LAST:event_haut3ActionPerformed
+
+    private void haut4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_haut4ActionPerformed
+       modifierLabel(NB4, +1);
+    }//GEN-LAST:event_haut4ActionPerformed
+
+    private void bas7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bas7ActionPerformed
+        modifierLabel(NB3, -1);
+    }//GEN-LAST:event_bas7ActionPerformed
+
+    private void bas8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bas8ActionPerformed
+        modifierLabel(NB4, -1);
+    }//GEN-LAST:event_bas8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,10 +305,10 @@ private void modifierLabel(javax.swing.JLabel label, int delta) {
         valeur = (valeur + delta + 10) % 10; // boucle de 0 à 9
         label.setText(String.valueOf(valeur));
     } catch (NumberFormatException ex) {
-        label.setText("0");
-    }
-}
+        label.setText("0");}}}
+    
 
 
 
-}
+
+
