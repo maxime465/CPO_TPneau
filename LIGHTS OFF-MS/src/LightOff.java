@@ -1,22 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
-
-/**
- * Lights Off - Version graphique
- * Boutons à gauche = lignes
- * Boutons en haut = colonnes
- */
 public class LightOff extends JFrame {
 
-    private final int TAILLE = 5;
+    private static final int TAILLE = 5;
 
     private boolean[][] grille;
-    private JButton[][] boutonsCellules;
-
-    private JButton[] boutonsLignes;
-    private JButton[] boutonsColonnes;
-
+    private JButton[][] cellules;
     private int nbCoups;
     private JLabel labelCoups;
 
@@ -32,49 +22,42 @@ public class LightOff extends JFrame {
         setLayout(new BorderLayout());
 
         grille = new boolean[TAILLE][TAILLE];
-        boutonsCellules = new JButton[TAILLE][TAILLE];
-        boutonsLignes = new JButton[TAILLE];
-        boutonsColonnes = new JButton[TAILLE];
+        cellules = new JButton[TAILLE][TAILLE];
 
-        // ===== Bandeau haut (colonnes) =====
+        
         JPanel panelHaut = new JPanel(new GridLayout(1, TAILLE + 1));
         panelHaut.add(new JLabel("")); // coin vide
 
         for (int j = 0; j < TAILLE; j++) {
-            JButton btnCol = new JButton("C" + j);
+            JButton btnCol = new JButton("C" + (j + 1));
             final int col = j;
             btnCol.addActionListener(e -> jouerColonne(col));
-            boutonsColonnes[j] = btnCol;
             panelHaut.add(btnCol);
         }
+
         add(panelHaut, BorderLayout.NORTH);
 
-        // ===== Panneau central (lignes + grille) =====
         JPanel centre = new JPanel(new GridLayout(TAILLE, TAILLE + 1));
 
         for (int i = 0; i < TAILLE; i++) {
 
-            // Bouton de ligne (à gauche)
-            JButton btnLigne = new JButton("L" + i);
+            JButton btnLigne = new JButton("L" + (i + 1));
             final int ligne = i;
             btnLigne.addActionListener(e -> jouerLigne(ligne));
-            boutonsLignes[i] = btnLigne;
             centre.add(btnLigne);
 
-            // Cellules visuelles
             for (int j = 0; j < TAILLE; j++) {
                 JButton cell = new JButton();
-                cell.setEnabled(false); // pas cliquable
+                cell.setEnabled(false);
                 cell.setOpaque(true);
                 cell.setBorderPainted(false);
-                boutonsCellules[i][j] = cell;
+                cellules[i][j] = cell;
                 centre.add(cell);
             }
         }
 
         add(centre, BorderLayout.CENTER);
 
-        // ===== Bas (score + rejouer) =====
         JPanel bas = new JPanel();
         labelCoups = new JLabel("Coups : 0");
         JButton btnRejouer = new JButton("Rejouer");
@@ -87,24 +70,20 @@ public class LightOff extends JFrame {
         setVisible(true);
     }
 
-    // ===================== LOGIQUE DU JEU =====================
 
     private void initialiserPartie() {
         nbCoups = 0;
         labelCoups.setText("Coups : 0");
 
-        // Tout éteint
         for (int i = 0; i < TAILLE; i++) {
             for (int j = 0; j < TAILLE; j++) {
                 grille[i][j] = false;
             }
         }
 
-        // Génération solvable (coups aléatoires)
+        
         Random rand = new Random();
-        int nbCoupsAleatoires = 10;
-
-        for (int k = 0; k < nbCoupsAleatoires; k++) {
+        for (int k = 0; k < 10; k++) {
             if (rand.nextBoolean()) {
                 jouerLigneInterne(rand.nextInt(TAILLE));
             } else {
@@ -112,7 +91,7 @@ public class LightOff extends JFrame {
             }
         }
 
-        rafraichirAffichage();
+        rafraichir();
     }
 
     private void jouerLigne(int ligne) {
@@ -125,7 +104,6 @@ public class LightOff extends JFrame {
         finDeCoup();
     }
 
-    // --- méthodes internes (sans compteur)
     private void jouerLigneInterne(int ligne) {
         for (int j = 0; j < TAILLE; j++) {
             grille[ligne][j] = !grille[ligne][j];
@@ -141,11 +119,11 @@ public class LightOff extends JFrame {
     private void finDeCoup() {
         nbCoups++;
         labelCoups.setText("Coups : " + nbCoups);
-        rafraichirAffichage();
+        rafraichir();
 
         if (toutesEteintes()) {
             JOptionPane.showMessageDialog(this,
-                    " Victoire en " + nbCoups + " coups !");
+                    "Victoire en " + nbCoups + " coups !");
         }
     }
 
@@ -158,13 +136,14 @@ public class LightOff extends JFrame {
         return true;
     }
 
-    private void rafraichirAffichage() {
+    private void rafraichir() {
         for (int i = 0; i < TAILLE; i++) {
             for (int j = 0; j < TAILLE; j++) {
-                boutonsCellules[i][j].setBackground(
+                cellules[i][j].setBackground(
                         grille[i][j] ? Color.YELLOW : Color.DARK_GRAY
                 );
             }
         }
     }
 }
+
