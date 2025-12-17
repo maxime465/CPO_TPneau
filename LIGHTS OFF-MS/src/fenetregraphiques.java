@@ -1,17 +1,110 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class fenetregraphiques extends JFrame {
 
-    // Déclarations des variables
     private GrilleDeJeu grille;
     private int nbCoups;
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">
-    // </editor-fold>
+    
+    private JPanel PanneauDiagonales; 
+
+    public fenetregraphiques() {
+        initComponents();  
+        this.setSize(800, 800);
+        this.setLocationRelativeTo(null);
+
+        int nbLignes = 5;
+        int nbColonnes = 5;
+        this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
+        this.nbCoups = 0;
+
+        initialiserPartie();
+        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
+
+        
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                CelluleGraphique cg = new CelluleGraphique(grille.matriceCellules[i][j]);
+                PanneauGrille.add(cg);
+            }
+        }
+
+       
+        Panneauligne.setLayout(new GridLayout(nbLignes, 1));
+        for (int i = 0; i < nbLignes; i++) {
+            JButton boutonLigne = new JButton("Ligne " + i);
+            final int index = i;
+            boutonLigne.addActionListener(e -> {
+                grille.activerLigneDeCellules(index);
+                rafraichirGrille();
+            });
+            Panneauligne.add(boutonLigne);
+        }
+
+       
+        Panneaucolonne.setLayout(new GridLayout(1, nbColonnes));
+        for (int j = 0; j < nbColonnes; j++) {
+            JButton boutonCol = new JButton("Col " + j);
+            final int index = j;
+            boutonCol.addActionListener(e -> {
+                grille.activerColonneDeCellules(index);
+                rafraichirGrille();
+            });
+            Panneaucolonne.add(boutonCol);
+        }
+
+      
+        PanneauDiagonales.setLayout(new GridLayout(1, 2));
+        JButton diagDesc = new JButton("Diagonale Descendante");
+        diagDesc.addActionListener(e -> {
+            grille.activerDiagonaleDescendante();
+            rafraichirGrille();
+        });
+        JButton diagMont = new JButton("Diagonale Montante");
+        diagMont.addActionListener(e -> {
+            grille.activerDiagonaleMontante();
+            rafraichirGrille();
+        });
+        PanneauDiagonales.add(diagDesc);
+        PanneauDiagonales.add(diagMont);
+
+        
+        remplirGrilleAleatoire();
+        rafraichirGrille();
+    }
+
+    private void initialiserPartie() {
+        nbCoups = 0;
+        grille.eteindreToutesLesCellules();
+    }
+
+    private void remplirGrilleAleatoire() {
+        Random rand = new Random();
+        int nbLignes = grille.matriceCellules.length;
+        int nbColonnes = grille.matriceCellules[0].length;
+
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                if (rand.nextBoolean()) {
+                    grille.matriceCellules[i][j].activerCellule();
+                }
+            }
+        }
+    }
+
+    private void rafraichirGrille() {
+        for (Component c : PanneauGrille.getComponents()) {
+            if (c instanceof CelluleGraphique cg) {
+                cg.rafraichir();
+            }
+        }
+        nbCoups++;
+        if (grille.cellulesToutesEteintes()) {
+            JOptionPane.showMessageDialog(this, "Bravo ! Tu as gagné en " + nbCoups + " coups !");
+        }
+    }
+
     
 
 
@@ -72,57 +165,13 @@ public class fenetregraphiques extends JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public fenetregraphiques() {
-        initComponents();  // initialise les panneaux
-        this.setSize(700, 700);
-        this.setLocationRelativeTo(null);
-
-        int nbLignes = 5;
-        int nbColonnes = 5;
-        this.grille = new GrilleDeJeu(nbLignes, nbColonnes);
-        this.nbCoups = 0;
-
-        initialiserPartie();
-
-        // Grille principale
-        PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
-        for (int i = 0; i < nbLignes; i++) {
-            for (int j = 0; j < nbColonnes; j++) {
-                CelluleGraphique cg = new CelluleGraphique(grille.matriceCellules[i][j]);
-                PanneauGrille.add(cg);
-            }
-        }
-
-        // Boutons lignes
-        Panneauligne.setLayout(new GridLayout(nbLignes, 1));
-        for (int i = 0; i < nbLignes; i++) {
-            JButton boutonLigne = new JButton("Ligne " + i);
-            final int index = i;
-            boutonLigne.addActionListener(e -> {
-                grille.activerLigneDeCellules(index);
-                rafraichirGrille();
-            });
-            Panneauligne.add(boutonLigne);
-        }
-
-        // Boutons colonnes
-        Panneaucolonne.setLayout(new GridLayout(1, nbColonnes));
-        for (int j = 0; j < nbColonnes; j++) {
-            JButton boutonCol = new JButton("Col " + j);
-            final int index = j;
-            boutonCol.addActionListener(e -> {
-                grille.activerColonneDeCellules(index);
-                rafraichirGrille();
-            });
-            Panneaucolonne.add(boutonCol);
-        }
-    }
-
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void creerPanneaux() {
+
         PanneauGrille = new JPanel();
         Panneauligne = new JPanel();
         Panneaucolonne = new JPanel();
+        PanneauDiagonales = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -138,11 +187,12 @@ public class fenetregraphiques extends JFrame {
         Panneaucolonne.setBounds(150, 10, 400, 60);
         Panneaucolonne.setBackground(new Color(255, 0, 51));
         getContentPane().add(Panneaucolonne);
-    }
 
-    private void initialiserPartie() {
-        nbCoups = 0;
-        grille.eteindreToutesLesCellules();
+        PanneauDiagonales.setBounds(560, 80, 200, 60);
+        PanneauDiagonales.setBackground(new Color(255, 255, 0));
+        getContentPane().add(PanneauDiagonales);
+
+        pack();
     }
 
 
@@ -151,19 +201,10 @@ public class fenetregraphiques extends JFrame {
     private javax.swing.JPanel Panneaucolonne;
     private javax.swing.JPanel Panneauligne;
     // End of variables declaration//GEN-END:variables
-    private void rafraichirGrille() {
-        for (Component c : PanneauGrille.getComponents()) {
-            if (c instanceof CelluleGraphique cg) {
-                cg.rafraichir();
-            }
-        }
-        nbCoups++;
-        if (grille.cellulesToutesEteintes()) {
-            JOptionPane.showMessageDialog(this, "Bravo ! Tu as gagné en " + nbCoups + " coups !");
-        }
-    }
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new fenetregraphiques().setVisible(true));
     }
+
+                  
 }
+

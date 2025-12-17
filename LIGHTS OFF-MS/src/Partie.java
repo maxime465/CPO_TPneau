@@ -2,86 +2,47 @@ import java.util.Random;
 
 public class Partie {
 
-    private static final int SIZE = 5; 
-    private boolean[][] lights = new boolean[SIZE][SIZE];
-    private int score = 0;
+    private GrilleDeJeu grille;
+    private int nbCoups;
 
-    public Partie() {
-        initGame();
+    public Partie(int nbLignes, int nbColonnes) {
+        
+        grille = new GrilleDeJeu(nbLignes, nbColonnes);
+        nbCoups = 0;
+        initialiserPartie();
     }
 
-    
-    public void initGame() {
+    private void initialiserPartie() {
+        nbCoups = 0;
+        grille.eteindreToutesLesCellules();
+
         Random rand = new Random();
-        score = 0;
+        int nbLignes = grille.matriceCellules.length;
+        int nbColonnes = grille.matriceCellules[0].length;
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                lights[i][j] = rand.nextBoolean();
+        // Générer une grille aléatoire
+        for (int i = 0; i < nbLignes; i++) {
+            for (int j = 0; j < nbColonnes; j++) {
+                if (rand.nextBoolean()) { // 50% de chance que la cellule soit allumée
+                    grille.matriceCellules[i][j].activerCellule();
+                }
             }
         }
     }
 
-   
-    public void toggleColumn(int col) {
-        score++;
-        for (int i = 0; i < SIZE; i++) {
-            lights[i][col] = !lights[i][col];
-        }
+    public GrilleDeJeu getGrille() {
+        return grille;
     }
 
-   
-    public void toggleRow(int row) {
-        score++;
-        for (int j = 0; j < SIZE; j++) {
-            lights[row][j] = !lights[row][j];
-        }
+    public int getNbCoups() {
+        return nbCoups;
     }
 
-   
-    public void toggleDiagonalDesc() {
-        score++;
-        for (int i = 0; i < SIZE; i++) {
-            lights[i][i] = !lights[i][i];
-        }
+    public void incrementerCoups() {
+        nbCoups++;
     }
 
-    
-    public void toggleDiagonalAsc() {
-        score++;
-        for (int i = 0; i < SIZE; i++) {
-            lights[i][SIZE - 1 - i] = !lights[i][SIZE - 1 - i];
-        }
-    }
-
-    // Vérifie si toutes les lumières sont éteintes
-    public boolean checkWin() {
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                if (lights[i][j]) return false;
-            }
-        }
-        return true;
-    }
-
-    
-    public void afficherGrille() {
-        System.out.println("Score : " + score);
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                System.out.print(lights[i][j] ? "X " : "O ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    
-    public int getScore() {
-        return score;
-    }
-
-    void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean estGagne() {
+        return grille.cellulesToutesEteintes();
     }
 }
