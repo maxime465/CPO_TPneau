@@ -6,11 +6,11 @@ public class fenetregraphiques extends JFrame {
 
     private GrilleDeJeu grille;
     private int nbCoups;
-    
-    private JPanel PanneauDiagonales; 
+
+    private JPanel PanneauDiagonales;
 
     public fenetregraphiques() {
-        initComponents();  
+        creerPanneaux(); // crée les panneaux et positionne
         this.setSize(800, 800);
         this.setLocationRelativeTo(null);
 
@@ -22,7 +22,7 @@ public class fenetregraphiques extends JFrame {
         initialiserPartie();
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
 
-        
+        // Ajouter les cellules graphiques
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 CelluleGraphique cg = new CelluleGraphique(grille.matriceCellules[i][j]);
@@ -30,7 +30,7 @@ public class fenetregraphiques extends JFrame {
             }
         }
 
-       
+        // Boutons lignes
         Panneauligne.setLayout(new GridLayout(nbLignes, 1));
         for (int i = 0; i < nbLignes; i++) {
             JButton boutonLigne = new JButton("Ligne " + i);
@@ -42,7 +42,7 @@ public class fenetregraphiques extends JFrame {
             Panneauligne.add(boutonLigne);
         }
 
-       
+        // Boutons colonnes
         Panneaucolonne.setLayout(new GridLayout(1, nbColonnes));
         for (int j = 0; j < nbColonnes; j++) {
             JButton boutonCol = new JButton("Col " + j);
@@ -54,8 +54,8 @@ public class fenetregraphiques extends JFrame {
             Panneaucolonne.add(boutonCol);
         }
 
-      
-        PanneauDiagonales.setLayout(new GridLayout(1, 2));
+        // Boutons diagonales et Recommencer
+        PanneauDiagonales.setLayout(new GridLayout(1, 3));
         JButton diagDesc = new JButton("Diagonale Descendante");
         diagDesc.addActionListener(e -> {
             grille.activerDiagonaleDescendante();
@@ -66,10 +66,17 @@ public class fenetregraphiques extends JFrame {
             grille.activerDiagonaleMontante();
             rafraichirGrille();
         });
+        JButton boutonRecommencer = new JButton("Recommencer");
+        boutonRecommencer.addActionListener(e -> {
+            initialiserPartie();
+            remplirGrilleAleatoire();
+            rafraichirGrille();
+        });
         PanneauDiagonales.add(diagDesc);
         PanneauDiagonales.add(diagMont);
+        PanneauDiagonales.add(boutonRecommencer);
 
-        
+        // Remplir la grille aléatoire au démarrage
         remplirGrilleAleatoire();
         rafraichirGrille();
     }
@@ -96,7 +103,7 @@ public class fenetregraphiques extends JFrame {
     private void rafraichirGrille() {
         for (Component c : PanneauGrille.getComponents()) {
             if (c instanceof CelluleGraphique cg) {
-                cg.rafraichir();
+                cg.rafraichir(); // dans cette méthode, mets la couleur violette quand activée
             }
         }
         nbCoups++;
@@ -105,7 +112,37 @@ public class fenetregraphiques extends JFrame {
         }
     }
 
-    
+    private void creerPanneaux() {
+        PanneauGrille = new JPanel();
+        Panneauligne = new JPanel();
+        Panneaucolonne = new JPanel();
+        PanneauDiagonales = new JPanel();
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        PanneauGrille.setBounds(150, 80, 400, 400);
+        PanneauGrille.setBackground(Color.LIGHT_GRAY);
+        getContentPane().add(PanneauGrille);
+
+        Panneauligne.setBounds(50, 80, 80, 400);
+        Panneauligne.setBackground(Color.BLUE);
+        getContentPane().add(Panneauligne);
+
+        Panneaucolonne.setBounds(150, 10, 400, 60);
+        Panneaucolonne.setBackground(Color.RED);
+        getContentPane().add(Panneaucolonne);
+
+        PanneauDiagonales.setBounds(560, 80, 300, 60);
+        PanneauDiagonales.setBackground(Color.YELLOW);
+        getContentPane().add(PanneauDiagonales);
+
+        pack();
+    }
+
+
+
+ 
 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -166,45 +203,18 @@ public class fenetregraphiques extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void creerPanneaux() {
-
-        PanneauGrille = new JPanel();
-        Panneauligne = new JPanel();
-        Panneaucolonne = new JPanel();
-        PanneauDiagonales = new JPanel();
-
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
-
-        PanneauGrille.setBounds(150, 80, 400, 400);
-        PanneauGrille.setBackground(new Color(102, 255, 102));
-        getContentPane().add(PanneauGrille);
-
-        Panneauligne.setBounds(50, 80, 80, 400);
-        Panneauligne.setBackground(new Color(0, 0, 255));
-        getContentPane().add(Panneauligne);
-
-        Panneaucolonne.setBounds(150, 10, 400, 60);
-        Panneaucolonne.setBackground(new Color(255, 0, 51));
-        getContentPane().add(Panneaucolonne);
-
-        PanneauDiagonales.setBounds(560, 80, 200, 60);
-        PanneauDiagonales.setBackground(new Color(255, 255, 0));
-        getContentPane().add(PanneauDiagonales);
-
-        pack();
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanneauGrille;
     private javax.swing.JPanel Panneaucolonne;
     private javax.swing.JPanel Panneauligne;
     // End of variables declaration//GEN-END:variables
+             // Variables déclarées pour NetBeans (ou pour référence)
+    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new fenetregraphiques().setVisible(true));
     }
-
-                  
 }
+
 
