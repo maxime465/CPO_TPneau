@@ -20,10 +20,10 @@ public class Partie {
         int nbLignes = grille.matriceCellules.length;
         int nbColonnes = grille.matriceCellules[0].length;
 
-        // Générer une grille aléatoire
+      
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
-                if (rand.nextBoolean()) { // 50% de chance que la cellule soit allumée
+                if (rand.nextBoolean()) { 
                     grille.matriceCellules[i][j].activerCellule();
                 }
             }

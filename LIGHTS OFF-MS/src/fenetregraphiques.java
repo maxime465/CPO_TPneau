@@ -10,7 +10,7 @@ public class fenetregraphiques extends JFrame {
     private JPanel PanneauDiagonales;
 
     public fenetregraphiques() {
-        creerPanneaux(); // crée les panneaux et positionne
+        creerPanneaux(); 
         this.setSize(800, 800);
         this.setLocationRelativeTo(null);
 
@@ -22,7 +22,7 @@ public class fenetregraphiques extends JFrame {
         initialiserPartie();
         PanneauGrille.setLayout(new GridLayout(nbLignes, nbColonnes));
 
-        // Ajouter les cellules graphiques
+        
         for (int i = 0; i < nbLignes; i++) {
             for (int j = 0; j < nbColonnes; j++) {
                 CelluleGraphique cg = new CelluleGraphique(grille.matriceCellules[i][j]);
@@ -30,7 +30,7 @@ public class fenetregraphiques extends JFrame {
             }
         }
 
-        // Boutons lignes
+        
         Panneauligne.setLayout(new GridLayout(nbLignes, 1));
         for (int i = 0; i < nbLignes; i++) {
             JButton boutonLigne = new JButton("Ligne " + i);
@@ -42,7 +42,7 @@ public class fenetregraphiques extends JFrame {
             Panneauligne.add(boutonLigne);
         }
 
-        // Boutons colonnes
+       
         Panneaucolonne.setLayout(new GridLayout(1, nbColonnes));
         for (int j = 0; j < nbColonnes; j++) {
             JButton boutonCol = new JButton("Col " + j);
@@ -54,7 +54,7 @@ public class fenetregraphiques extends JFrame {
             Panneaucolonne.add(boutonCol);
         }
 
-        // Boutons diagonales et Recommencer
+        
         PanneauDiagonales.setLayout(new GridLayout(1, 3));
         JButton diagDesc = new JButton("Diagonale Descendante");
         diagDesc.addActionListener(e -> {
@@ -76,7 +76,7 @@ public class fenetregraphiques extends JFrame {
         PanneauDiagonales.add(diagMont);
         PanneauDiagonales.add(boutonRecommencer);
 
-        // Remplir la grille aléatoire au démarrage
+
         remplirGrilleAleatoire();
         rafraichirGrille();
     }
@@ -103,7 +103,7 @@ public class fenetregraphiques extends JFrame {
     private void rafraichirGrille() {
         for (Component c : PanneauGrille.getComponents()) {
             if (c instanceof CelluleGraphique cg) {
-                cg.rafraichir(); // dans cette méthode, mets la couleur violette quand activée
+                cg.rafraichir(); 
             }
         }
         nbCoups++;
@@ -209,7 +209,7 @@ public class fenetregraphiques extends JFrame {
     private javax.swing.JPanel Panneaucolonne;
     private javax.swing.JPanel Panneauligne;
     // End of variables declaration//GEN-END:variables
-             // Variables déclarées pour NetBeans (ou pour référence)
+             
     
 
     public static void main(String[] args) {
